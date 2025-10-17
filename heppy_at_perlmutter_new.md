@@ -1,3 +1,8 @@
+# BEFORE YOU TRY THIS...
+
+- python via modules on permutter is a blunder in my opinion
+- use conda: https://github.com/alicernc/info/blob/main/heppy_at_perlmutter_conda.md (sorry for that I am not a conda fan)
+
 # Build your new heppy + pyjetty
 
 - note: lines using Today's date `$(date +%Y-%m-%d)` for the new workdir are commented out with `#` ... you can use those for compilation on a given day but of course you do not want to compile these every day... 
