@@ -4,14 +4,15 @@ A how-to guide on using the AO2D to BerkeleyTree converter at Perlmutter. Any co
 
 ## Table of contents
 
-- [Table of contents](#table-of-contents)
-- [Contact](#contact)
-- [Currently available datasets](#currently-available-datasets)
-- [Shifter](#shifter)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
-- [Grid tokens](#grid-tokens)
-- [Usage](#usage)
+- [Run 3 data conversion on Perlmutter](#run-3-data-conversion-on-perlmutter)
+  - [Table of contents](#table-of-contents)
+  - [Contact](#contact)
+  - [Currently available datasets](#currently-available-datasets)
+  - [Shifter](#shifter)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Grid tokens](#grid-tokens)
+  - [Usage](#usage)
 
 ## Contact
 
@@ -70,12 +71,18 @@ These options can be combined, e.g. `-ctv` will skip the download but will perfo
 The most relevant user parameters are listed in the dataset parameters section:
 
 - `HYPERLOOP_FILELIST`: The path to a list of Hyperloop directories. You should get this from the Hyperloop page of the relevant train: click on the "Submitted jobs" tab and then the "Copy all output directories" button on the top right. The directories should be copied onto your clipboard. Paste these into a text file and save this text file somewhere, preferably the prepared directory `hylists`.
-- `OUTPUT_DIR`: The path to where the downloaded AO2Ds and converted trees will be placed.  Testing before performing a full conversion is **highly recommended**. There is a prepared staging area for testing downloads and conversions, located at `/global/cfs/cdirs/alice/alicepro/hiccup/rstorage/alice/run3/data/staging`. A user-specific directory is recommended, i.e. set `OUTPUT_DIR=/global/cfs/cdirs/alice/alicepro/hiccup/rstorage/alice/run3/data/staging/$USER/<dataset_name>`. The output directory is created automatically if it does not already exist. Once your testing is complete, datasets should be downloaded and converted with `OUTPUT_DIR=/global/cfs/cdirs/alice/alicepro/hiccup/rstorage/alice/run3/data/<dataset_name>`.
+- `OUTPUT_DIR`: The path to where the downloaded AO2Ds and converted trees will be placed.  Testing before performing a full conversion is **highly recommended**. There is a prepared staging area for testing downloads and conversions, located at:
+  ```$CFS/alice/alicepro/hiccup/rstorage/alice/run3/data/staging```
+
+  A user-specific directory is recommended, i.e. set the output directory as:
+  ```OUTPUT_DIR=$CFS/alice/alicepro/hiccup/rstorage/alice/run3/data/staging/$USER/<dataset_name>```
+
+  The output directory is created automatically if it does not already exist. Once your testing is complete, datasets should be downloaded and converted with `OUTPUT_DIR=$CFS/alice/alicepro/hiccup/rstorage/alice/run3/data/<dataset_name>`.
 - `EMAIL`: The email you wish to be notified at when the Slurm conversion job completes. Leave empty (`EMAIL=""` or `EMAIL=`) if you do not wish to be notified.
-- `NAOD`: The number of AO2Ds to combine into one BerkeleyTree. Generally any number from 2 to 10 will yield reasonably sized BerkeleyTrees. We recommend running some test runs `launch_pipeline_nersc.sh -ct` with a few different values for `NAOD` to see what yields a reasonable size for the tree (aiming for around 2-3 GB per tree).
+- `NAOD`: The number of AO2Ds to combine into one BerkeleyTree. Generally any number from 2 to 10 will yield reasonably sized BerkeleyTrees. We recommend running some test runs with `./launch_pipeline_nersc.sh -ct` trying a few different values for `NAOD` to see what yields a reasonable size for the tree (aiming for around 2-3 GB per tree).
 
 > [!CAUTION]
-> Because the AO2D and tree directories are automatically cleared before downloading or converting, it is very easy to accidentally wipe your previous work, or worse, delete someone else's data! **Please use the your personalized staging area in** `/global/cfs/cdirs/alice/alicepro/hiccup/rstorage/alice/run3/data/staging/$USER/<dataset_name>` while testing to avoid affecting existing data or other people's staging areas, and only use the `run3/data` directory when you are fully ready and absolutely sure you're not about to unintentionally delete other data.
+> Because the AO2D and tree directories are automatically cleared before downloading or converting, it is very easy to accidentally wipe your previous work, or worse, delete someone else's data! **Please use the your personalized staging area in `/global/cfs/cdirs/alice/alicepro/hiccup/rstorage/alice/run3/data/staging/$USER/<dataset_name>` while testing to avoid affecting existing data or other people's staging areas**, and only use the `run3/data` directory when you are fully ready and absolutely sure you're not about to unintentionally delete other data.
 
 Some other parameters of relevance to the user but should probably be left alone:
 
